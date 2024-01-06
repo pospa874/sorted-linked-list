@@ -5,6 +5,13 @@ import java.util.*;
 
 /**
  * A SortedLinkedList class that maintains its elements in sorted order.
+ * This collection is sorted according to the natural ordering of its elements,
+ * determined by the {@code compareTo()} method defined in the element's class.
+ * <p>
+ * Users can access elements by their integer index (position in the list),
+ * and perform a wide range of operations similar to those in List, LinkedList, Collections, etc.
+ * <p>
+ * This list allows duplicate elements but does not permit null elements.
  *
  * @param <E> the type of elements held in this collection
  */
@@ -26,14 +33,13 @@ public class SortedLinkedList<E extends Comparable<E>> extends SortedList<E> {
      *
      * @param e the element to add
      * @return true (as specified by Collection.add(E))
+     * @throws NullPointerException if the specified element is null
      */
     @Override
     public boolean add(E e) {
-        // Check if the list is not empty and if the new element is of the same type as the existing elements
-        if (!list.isEmpty() && !list.getFirst().getClass().equals(e.getClass())) {
-            throw new IllegalArgumentException("Cannot mix different types of elements in the list");
+        if (e == null) {
+            throw new NullPointerException("Null elements are not permitted in the list");
         }
-
         // If the list is empty or the new element is larger than the last element in the list, add it to the end
         if (list.isEmpty() || e.compareTo(list.getLast()) >= 0) {
             list.addLast(e);
@@ -151,4 +157,22 @@ public class SortedLinkedList<E extends Comparable<E>> extends SortedList<E> {
     public E getLast() {
         return list.getLast();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SortedLinkedList<?> that = (SortedLinkedList<?>) o;
+        return list.equals(that.list);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(list);
+    }
+
 }

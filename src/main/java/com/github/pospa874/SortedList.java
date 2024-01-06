@@ -7,6 +7,13 @@ import java.util.NoSuchElementException;
 
 /**
  * A SortedList abstract class that maintains its elements in sorted order.
+ * This collection is sorted according to the natural ordering of its elements,
+ * determined by the {@code compareTo()} method defined in the element's class.
+ * <p>
+ * Users can access elements by their integer index (position in the list),
+ * and perform a wide range of operations similar to those in List, LinkedList, Collections, etc.
+ * <p>
+ * This list allows duplicate elements but does not permit null elements.
  *
  * @param <E> the type of elements held in this collection
  */
