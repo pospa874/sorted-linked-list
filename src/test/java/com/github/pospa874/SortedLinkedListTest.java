@@ -24,6 +24,13 @@ public class SortedLinkedListTest {
     }
 
     @Test
+    public void testAddNullElement() {
+        Exception exception = assertThrows(NullPointerException.class, () -> list.add(null));
+        assertEquals("Null elements are not permitted in the list", exception.getMessage());
+    }
+
+
+    @Test
     public void testRemoveIndex() {
         list.add(3);
         list.add(1);
@@ -107,11 +114,7 @@ public class SortedLinkedListTest {
     public void testAddDifferentTypes() {
         SortedLinkedList list = new SortedLinkedList<>();
         list.add(1);
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> list.add("test"));
-        String expectedMessage = "Cannot mix different types of elements in the list";
-        String actualMessage = exception.getMessage();
-        assertEquals(expectedMessage, actualMessage);
+        assertThrows(ClassCastException.class, () -> list.add("test"));
     }
-
 
 }
