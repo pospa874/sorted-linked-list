@@ -29,20 +29,29 @@ public class SortedLinkedList<E extends Comparable<E>> extends SortedList<E> {
      */
     @Override
     public boolean add(E e) {
+        // Check if the list is not empty and if the new element is of the same type as the existing elements
         if (!list.isEmpty() && !list.getFirst().getClass().equals(e.getClass())) {
             throw new IllegalArgumentException("Cannot mix different types of elements in the list");
         }
 
-        int index = 0;
-        for (E item : list) {
-            if (item.compareTo(e) > 0) {
-                break;
+        // If the list is empty or the new element is larger than the last element in the list, add it to the end
+        if (list.isEmpty() || e.compareTo(list.getLast()) >= 0) {
+            list.addLast(e);
+        } else {
+            // Otherwise, find the correct position in the list for the new element
+            ListIterator<E> iterator = list.listIterator();
+            while (iterator.hasNext()) {
+                // If the new element is smaller than the current element, insert it before the current element
+                if (e.compareTo(iterator.next()) < 0) {
+                    iterator.previous();
+                    iterator.add(e);
+                    break;
+                }
             }
-            index++;
         }
-        list.add(index, e);
         return true;
     }
+
 
     /**
      * Removes the element at the specified position in this list.
