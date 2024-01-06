@@ -31,12 +31,12 @@ stringList.add("cherry");
 System.out.println(stringList.toString());  // Prints: [apple, banana, cherry]
 ```
 
-### Building the Project
+## Building the Project
 This project uses Gradle 8.4 for building. You can build the project using the following command:
 `./gradlew build`
 
 This will compile the source code, run the tests, and generate a JAR file in the build/libs directory.
 
-### Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
