@@ -2,6 +2,7 @@ package com.github.pospa874;
 
 import java.io.Serializable;
 import java.util.AbstractSequentialList;
+import java.util.Collection;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
@@ -27,6 +28,37 @@ public abstract class SortedList<E extends Comparable<E>> extends AbstractSequen
      */
     @Override
     public abstract boolean add(E e);
+
+    /**
+     * Adds all the elements in the specified collection to this list in sorted order.
+     * The order of the elements in the specified collection does not affect their insertion order in this list.
+     * Null elements in the collection will be ignored.
+     *
+     * @param c collection containing elements to be added to this list
+     * @return true if this list changed as a result of the call
+     * @throws NullPointerException if the specified collection is null
+     */
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        boolean isModified = false;
+        for (E e : c) {
+            isModified |= add(e);
+        }
+        return isModified;
+    }
+
+    /**
+     * This operation is not supported because it can violate the sorted order of the list.
+     *
+     * @param index index at which to insert the first element from the specified collection
+     * @param c collection containing elements to be added to this list
+     * @return true if this list changed as a result of the call
+     * @throws UnsupportedOperationException always
+     */
+    @Override
+    public boolean addAll(int index, Collection<? extends E> c) {
+        throw new UnsupportedOperationException("Cannot add a collection at a specific index");
+    }
 
     /**
      * Removes the element at the specified position in this list.

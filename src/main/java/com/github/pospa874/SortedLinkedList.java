@@ -58,6 +58,26 @@ public class SortedLinkedList<E extends Comparable<E>> extends SortedList<E> {
         return true;
     }
 
+    /**
+     * Adds all the elements in the specified collection to this list in sorted order.
+     * Overrides the addAll method in SortedList to throw an exception if the collection contains null elements.
+     *
+     * @param c collection containing elements to be added to this list
+     * @return true if this list changed as a result of the call
+     * @throws NullPointerException if the specified collection is null or contains one or more null elements
+     */
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        if (c == null) {
+            throw new NullPointerException("Null collection is not permitted");
+        }
+        for (E e : c) {
+            if (e == null) {
+                throw new NullPointerException("Null elements are not permitted in the list");
+            }
+        }
+        return super.addAll(c);
+    }
 
     /**
      * Removes the element at the specified position in this list.
